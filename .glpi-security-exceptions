@@ -1,0 +1,3 @@
+# Exceptions justifiées aux contrôles de sécurité communs (voir parime/glpi-plugin-security).
+# Une ligne par exception : « <contrôle> <identifiant> : <raison> ». Exemple :
+# tab-content Computer/PluginMonpluginPassport$1 : contenu public par conception (droits du cœur)
