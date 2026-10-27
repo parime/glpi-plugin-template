@@ -41,4 +41,6 @@ function plugin_init_monplugin(): void
     global $PLUGIN_HOOKS;
 
     $PLUGIN_HOOKS['csrf_compliant']['monplugin'] = true;
+    // Onglet des profils : attribuer les droits du plugin depuis l'interface.
+    Plugin::registerClass(PluginMonpluginProfile::class, ['addtabon' => [Profile::class]]);
 }
