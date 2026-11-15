@@ -1,3 +1,6 @@
+# CI de départ d'un plugin (charte section 7). À compléter dès que le plugin grandit, en copiant
+# les jobs du plugin le plus récent : CI officielle GLPI, installation GLPI 12, php-compat,
+# PHPStan niveau 6, PHP-CS-Fixer, PHPUnit, marketplace (SQL brut, Twig), matrice d'accès.
 name: CI
 
 on:
@@ -9,8 +12,41 @@ permissions:
 
 jobs:
   lint:
-    name: Syntaxe PHP
+    name: "Syntaxe PHP ${{ matrix.php }}"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ["8.2", "8.3", "8.4", "8.5"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7 (SHA pinned)
+      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2 (SHA pinned)
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - run: find . -path ./vendor -prune -o -name "*.php" -print0 | xargs -0 -n1 php -l
+
+  locales:
+    name: "Traductions complètes"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7 (SHA pinned)
-      - run: find . -path ./vendor -prune -o -name "*.php" -print0 | xargs -0 -n1 php -l
+      - name: "Installe gettext"
+        run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends gettext
+      # Le .pot est la source unique des traductions (charte section 2 bis). Le régénérer avec
+      # vendor/bin/extract-locales (composer require --dev glpi-project/tools) puis le versionner.
+      - name: "Variantes régionales à jour"
+        run: sh .github/scripts/sync-locale-variants.sh --check
+      - name: "Chaque langue de base traduit chaque chaîne du .pot"
+        run: |
+          status=0
+          pot=$(ls locales/*.pot)
+          for lang in fr_FR en_GB de_DE es_ES it_IT pl_PL pt_BR; do
+            msgfmt -c -o /dev/null "locales/$lang.po" || status=1
+            msgmerge --no-fuzzy-matching --quiet -o "/tmp/$lang.po" "locales/$lang.po" "$pot"
+            missing=$(msgattrib --untranslated "/tmp/$lang.po" | grep -c '^msgid "[^"]' || true)
+            if [ "$missing" -gt 0 ]; then
+              echo "::error::$lang.po : $missing chaîne(s) sans traduction"
+              status=1
+            fi
+          done
+          exit $status

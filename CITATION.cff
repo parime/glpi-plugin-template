@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Si vous réutilisez ce logiciel, merci de le citer comme suit."
+title: "Mon plugin for GLPI"
+type: software
+authors:
+  - family-names: GUILLOTTE
+    given-names: Vincent
+repository-code: "https://github.com/parime/glpi-plugin-template"
+license: GPL-3.0-or-later
+version: 0.1.0

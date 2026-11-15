@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: monplugin\n"
+"Language: fr_BE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "My plugin"
+msgstr "Mon plugin"
+
+msgid "Settings saved."
+msgstr "Réglages enregistrés."
+
+msgid "Overview"
+msgstr "Vue d'ensemble"
+
+msgid "What is this page for?"
+msgstr "À quoi sert cette page ?"
+
+msgid "What is expected:"
+msgstr "Ce qui est attendu :"
+
+msgid "This page gathers what the plugin follows for you."
+msgstr "Cette page rassemble ce que le plugin suit pour vous."
+
+msgid "Review the items marked in orange or red first."
+msgstr "Commencez par les éléments signalés en orange ou en rouge."
+
+msgid "Up to date"
+msgstr "À jour"
+
+msgid "Nothing to show yet"
+msgstr "Rien à afficher pour l'instant"
+
+msgid "Start by setting up the plugin in Setup > Plugins."
+msgstr "Commencez par régler le plugin dans Configuration > Plugins."
+
+msgid "All the settings of the plugin, and only here."
+msgstr "Tous les réglages du plugin, et seulement ici."
+
+msgid "Fill in each tab, then save."
+msgstr "Renseignez chaque onglet, puis enregistrez."
+
+msgid "General"
+msgstr "Général"
+
+msgid "About"
+msgstr "À propos"
+
+msgid "Enable the example"
+msgstr "Activer l'exemple"
+
+msgid "Example label"
+msgstr "Libellé d'exemple"
+
+msgid "Shown on the overview page."
+msgstr "Affiché sur la page de vue d'ensemble."
+
+msgid "Version"
+msgstr "Version"
+
+msgid "License"
+msgstr "Licence"

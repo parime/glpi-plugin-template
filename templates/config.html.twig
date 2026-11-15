@@ -1,0 +1,63 @@
+{#
+ # -------------------------------------------------------------------------
+ # Mon plugin for GLPI
+ # Copyright (C) 2026 Vincent GUILLOTTE
+ # https://github.com/parime/glpi-plugin-template
+ # -------------------------------------------------------------------------
+ # LICENSE
+ #
+ # This program is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version. See LICENSE for the full text.
+ # -------------------------------------------------------------------------
+ #}
+
+{# Page de configuration du plugin, organisée en onglets (charte section 9) : un onglet par
+   famille de réglages, un seul formulaire, aide visible sous chaque champ. #}
+{% import 'components/form/fields_macros.html.twig' as fields %}
+
+<div class="container-fluid mt-2">
+   {% include '@monplugin/_page_help.html.twig' with {
+      page: 'config',
+      purpose: __('All the settings of the plugin, and only here.', 'monplugin'),
+      expected: __('Fill in each tab, then save.', 'monplugin'),
+   } %}
+
+   <form method="post" action="">
+      <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}" />
+      <div class="card" style="max-width: 1100px;">
+         <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs" role="tablist">
+               <li class="nav-item" role="presentation">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#monplugin-config-general" type="button" role="tab">
+                     <i class="ti ti-settings me-1"></i>{{ __('General', 'monplugin') }}
+                  </button>
+               </li>
+               <li class="nav-item" role="presentation">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#monplugin-config-about" type="button" role="tab">
+                     <i class="ti ti-info-circle me-1"></i>{{ __('About', 'monplugin') }}
+                  </button>
+               </li>
+            </ul>
+         </div>
+         <div class="card-body tab-content">
+            <div class="tab-pane fade show active" id="monplugin-config-general" role="tabpanel">
+               {{ fields.sliderField('example_enabled', values.example_enabled, __('Enable the example', 'monplugin')) }}
+               {{ fields.textField('example_label', values.example_label, __('Example label', 'monplugin'), {
+                  'add_field_html': '<div class="form-hint">' ~ __('Shown on the overview page.', 'monplugin')|e ~ '</div>',
+               }) }}
+            </div>
+            <div class="tab-pane fade" id="monplugin-config-about" role="tabpanel">
+               <p><strong>{{ __('Version', 'monplugin') }}</strong> {{ version }}</p>
+               <p><strong>{{ __('License', 'monplugin') }}</strong> GPL-3.0-or-later</p>
+            </div>
+         </div>
+         <div class="card-footer">
+            <button type="submit" name="update" value="1" class="btn btn-primary">
+               <i class="ti ti-device-floppy me-1"></i>{{ __('Save') }}
+            </button>
+         </div>
+      </div>
+   </form>
+</div>

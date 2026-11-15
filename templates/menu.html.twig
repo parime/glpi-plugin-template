@@ -1,0 +1,42 @@
+{#
+ # -------------------------------------------------------------------------
+ # Mon plugin for GLPI
+ # Copyright (C) 2026 Vincent GUILLOTTE
+ # https://github.com/parime/glpi-plugin-template
+ # -------------------------------------------------------------------------
+ # LICENSE
+ #
+ # This program is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version. See LICENSE for the full text.
+ # -------------------------------------------------------------------------
+ #}
+
+{# Page d'usage type (charte section 8) : encadré d'aide, onglets de la rubrique, contenu, état vide
+   qui dit quoi faire ensuite. #}
+<div class="container-fluid mt-2">
+   {% include '@monplugin/_page_help.html.twig' with {
+      page: 'overview',
+      purpose: __('This page gathers what the plugin follows for you.', 'monplugin'),
+      expected: __('Review the items marked in orange or red first.', 'monplugin'),
+   } %}
+
+   {% include '@monplugin/_section_nav.html.twig' with {tabs: tabs} %}
+
+   <div class="card">
+      <div class="card-header">
+         <h3 class="card-title"><i class="ti ti-list-check me-2"></i>{{ __('Overview', 'monplugin') }}</h3>
+         <div class="card-actions">
+            {% include '@monplugin/_badge.html.twig' with {kind: 'ok', label: __('Up to date', 'monplugin')} %}
+         </div>
+      </div>
+      <div class="card-body">
+         <div class="empty">
+            <div class="empty-icon"><i class="ti ti-mood-empty"></i></div>
+            <p class="empty-title">{{ __('Nothing to show yet', 'monplugin') }}</p>
+            <p class="empty-subtitle text-muted">{{ __('Start by setting up the plugin in Setup > Plugins.', 'monplugin') }}</p>
+         </div>
+      </div>
+   </div>
+</div>

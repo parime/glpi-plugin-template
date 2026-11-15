@@ -2,3 +2,5 @@
 /.github export-ignore
 /.gitattributes export-ignore
 /.glpi-security-exceptions export-ignore
+/tools export-ignore
+/CHARTE.md export-ignore

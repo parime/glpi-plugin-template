@@ -1,0 +1,28 @@
+{#
+ # -------------------------------------------------------------------------
+ # Mon plugin for GLPI
+ # Copyright (C) 2026 Vincent GUILLOTTE
+ # https://github.com/parime/glpi-plugin-template
+ # -------------------------------------------------------------------------
+ # LICENSE
+ #
+ # This program is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # (at your option) any later version. See LICENSE for the full text.
+ # -------------------------------------------------------------------------
+ #}
+
+{# Onglets des écrans regroupés sous la seule entrée de menu du plugin (charte section 9).
+   tabs : liste de {label, icon, url, active}, déjà filtrée selon les droits. #}
+{% if tabs|length > 1 %}
+<ul class="nav nav-tabs mb-3">
+   {% for tab in tabs %}
+      <li class="nav-item">
+         <a class="nav-link{{ tab.active ? ' active' : '' }}" href="{{ tab.url }}"{% if tab.active %} aria-current="page"{% endif %}>
+            {% if tab.icon %}<i class="{{ tab.icon }} me-1"></i>{% endif %}{{ tab.label }}
+         </a>
+      </li>
+   {% endfor %}
+</ul>
+{% endif %}
