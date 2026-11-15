@@ -178,6 +178,13 @@ jamais : un faux positif s'ignore ligne par ligne avec sa raison. *auto : CI du 
   dans Configuration ou Administration pour des réglages, ni de secteur de menu propre. Exception :
   un plugin dont l'usage même est de configurer GLPI (Configuration GLPI Auto) a sa seule entrée
   dans Configuration, et elle mène à sa page de configuration.
+- **Exception « outil métier complet »** : un plugin qui est une application métier à part entière
+  (plusieurs modules d'usage pour des publics différents, comme GRC Manager) peut avoir **son propre
+  secteur de menu**, qui regroupe ses écrans d'usage. Ses réglages restent dans sa page de
+  configuration, et il n'ajoute pas d'autre entrée dans les secteurs natifs sans justification. Il
+  le déclare dans le fichier d'exceptions des contrôles de sécurité par la ligne
+  `menus-secteur-metier : <justification>` ; le contrôle « menus » compte alors ce secteur comme
+  une seule entrée.
 - Les objets natifs de GLPI (ordinateurs, applications, tickets) reçoivent des **onglets**, pas de
   nouveau menu.
 - Toute adresse retirée redirige vers la nouvelle (favoris des utilisateurs).
