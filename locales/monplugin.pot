@@ -1,0 +1,63 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: monplugin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "My plugin"
+msgstr ""
+
+msgid "Settings saved."
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "What is this page for?"
+msgstr ""
+
+msgid "What is expected:"
+msgstr ""
+
+msgid "This page gathers what the plugin follows for you."
+msgstr ""
+
+msgid "Review the items marked in orange or red first."
+msgstr ""
+
+msgid "Up to date"
+msgstr ""
+
+msgid "Nothing to show yet"
+msgstr ""
+
+msgid "Start by setting up the plugin in Setup > Plugins."
+msgstr ""
+
+msgid "All the settings of the plugin, and only here."
+msgstr ""
+
+msgid "Fill in each tab, then save."
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Enable the example"
+msgstr ""
+
+msgid "Example label"
+msgstr ""
+
+msgid "Shown on the overview page."
+msgstr ""
+
+msgid "Version"
+msgstr ""
+
+msgid "License"
+msgstr ""
