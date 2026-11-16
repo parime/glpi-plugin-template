@@ -72,11 +72,11 @@ L'adresse n'est ajoutée qu'une fois le projet réellement créé.
 | Règle | Raison | Contrôle |
 |---|---|---|
 | Workflow commun `security.yml` à la **dernière étiquette** de glpi-plugin-security, job obligatoire dans la protection de branche. | Les mêmes contrôles partout, mis à jour ensemble. | auto : audit hebdomadaire de glpi-plugin-security |
-| Droit vérifié dans chaque point d'entrée (`front/`, `ajax/`) : `Session::checkRight()`, `->check($id, READ)` ; droit sur l'**enregistrement** (`$item->can()`), jamais le seul droit global ; entité lue dans la requête validée par `Session::haveAccessToEntity()`. | Un utilisateur d'une entité ne lit ni ne modifie celles des autres. | auto : Semgrep communes ; CI du plugin : `check-entrypoints-auth.sh` |
-| **Matrice d'accès** de bout en bout (`tests/security/access-matrix.sh`) : chaque page exercée par un profil délégué, ou justifiée dans `not-covered.txt`. | Un écran ajouté sans test d'accès fait échouer la CI. | CI du plugin : `check-security-matrix-coverage.sh` |
+| Droit vérifié dans chaque point d'entrée (`front/`, `ajax/`) : `Session::checkRight()`, `->check($id, READ)` ; droit sur l'**enregistrement** (`$item->can()`), jamais le seul droit global ; entité lue dans la requête validée par `Session::haveAccessToEntity()`. | Un utilisateur d'une entité ne lit ni ne modifie celles des autres. | auto : Semgrep communes ; `check-entrypoints-auth.sh` (security.yml, v1.8.0) |
+| **Matrice d'accès** de bout en bout (`tests/security/access-matrix.sh`) : chaque page exercée par un profil délégué, ou justifiée dans `not-covered.txt`. | Un écran ajouté sans test d'accès fait échouer la CI. | auto : `check-security-matrix-coverage.sh` (security.yml, v1.8.0) |
 | Contenu d'un onglet : `displayTabContentForItem()` contrôle lui-même le droit. Chaque droit du plugin s'attribue depuis l'onglet du plugin sur les profils. | `ajax/common.tabs.php` ne consulte pas `getTabNameForItem()`. | auto : contrôles dans un vrai GLPI |
 | Affichage par **Twig uniquement**, sans `\|raw` sur une donnée non purifiée ; test XSS (`tests/security/xss-check.sh`). | Échappement automatique. | auto : Semgrep `glpi-twig-raw-output` ; CI du plugin : marketplace (cliquet HTML en PHP), xss-check |
-| **Pas de SQL brut** hors installation et migrations : `$DB->request()`, `insert()`, `update()`, `delete()`. | Requêtes préparées ; exigence de la marketplace. | CI du plugin : `check-marketplace-readiness.php` |
+| **Pas de SQL brut** hors installation et migrations : `$DB->request()`, `insert()`, `update()`, `delete()`. | Requêtes préparées ; exigence de la marketplace. | auto : `check-marketplace-readiness.php` (security.yml, v1.8.0) |
 | Formulaires en POST avec le jeton CSRF de GLPI (`csrf_compliant`) ; aucune action qui modifie en GET. | Protection CSRF du cœur. | revue |
 | Fichier déposé : taille, type MIME réel et extension vérifiés, stocké par `Document` du cœur ; test `upload-check.sh` dès qu'un plugin accepte un dépôt. | Pas de fichier exécutable ni d'image piégée. | revue ; CI du plugin |
 | **Appels HTTP sortants** par le client de GLPI seulement (`src/Compat/Http.php` : `Toolbox::getGuzzleClient()` en GLPI 11, `Glpi\Toolbox\HttpClient` en GLPI 12), avec un **contexte** (classe du plugin) qu'un administrateur peut ajouter à `GLPI_SERVERSIDE_URL_ALLOWED_PRIVATE_NETWORKS_CONTEXTS`, sans suivre les redirections. Jamais `curl_*` ni `file_get_contents()` sur une URL. | Proxy de GLPI respecté, réseaux privés fermés par défaut (SSRF), clé d'API jamais renvoyée vers un autre serveur. | revue |
@@ -137,8 +137,8 @@ tools/HEADER                   en-tête de licence
 Jobs attendus dans la CI de chaque plugin (en plus de `security.yml`) : CI officielle GLPI
 (matrice), installation réelle GLPI 12, php-compat, **PHPStan niveau 6** (configurations GLPI 11 et
 12), style (**PHP-CS-Fixer** avec `@PSR12`, lignes de 120 caractères au plus), **PHPUnit** unitaire
-et intégration, traductions complètes, marketplace (SQL brut, Twig), matrice d'accès, et CHANGELOG
-modifié dans chaque PR. PHPCS reste admis là où il est déjà en place. Un niveau PHPStan ne baisse
+et intégration, traductions complètes, et CHANGELOG modifié dans chaque PR. Les points d'entrée, la
+matrice d'accès et les exigences marketplace (SQL brut, Twig) sont vérifiés par `security.yml`. PHPCS reste admis là où il est déjà en place. Un niveau PHPStan ne baisse
 jamais : un faux positif s'ignore ligne par ligne avec sa raison. *auto : CI du plugin*
 
 ## 8. Interface et visuel
