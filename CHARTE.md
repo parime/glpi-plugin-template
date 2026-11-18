@@ -11,8 +11,8 @@ sans en changer les habitudes, se règle depuis sa propre page et n'ajoute qu'un
 Chaque règle donne **la règle**, **la raison** et **le contrôle** : *auto* (nom du contrôle
 automatique, presque toujours dans [glpi-plugin-security](https://github.com/parime/glpi-plugin-security),
 appelé par le workflow `security.yml` de chaque plugin) ou *revue* (relecture de PR). Les contrôles
-« charte » sont en **avertissement** depuis glpi-plugin-security v1.7.0 et deviendront bloquants en
-v1.8.0, une fois les écarts des plugins existants corrigés (issues ouvertes dans chaque dépôt).
+« charte » et le contrôle des menus sont **bloquants** depuis glpi-plugin-security v1.9.0 (avertissement
+de v1.7.0 à v1.8.x, le temps de corriger les écarts des plugins existants).
 
 ## 1. Licence et attribution
 
@@ -189,7 +189,7 @@ jamais : un faux positif s'ignore ligne par ligne avec sa raison. *auto : CI du 
   nouveau menu.
 - Toute adresse retirée redirige vers la nouvelle (favoris des utilisateurs).
 
-*Contrôle : auto, avertissement « menus » des contrôles dans un vrai GLPI (plus d'une entrée) ;
+*Contrôle : auto, contrôle « menus » des contrôles dans un vrai GLPI (bloquant au-delà d'une entrée) ;
 revue pour les réglages.*
 
 ## 10. Documentation
@@ -235,8 +235,8 @@ revue pour les réglages.*
 | Archive de release sans fichier de développement | 4 | bloquant |
 | Workflows GitHub Actions valides | 7 | bloquant |
 | Contrôles dans un vrai GLPI (onglets, droits, notifications, désinstallation) | 3, 4 | bloquant |
-| Contrôles dans un vrai GLPI : menus | 9 | avertissement (v1.7) |
-| Charte commune (licence, documentation, langues) | 1, 2, 10 | avertissement (v1.7), `charter-mode: error` pour l'activer en bloquant |
+| Contrôles dans un vrai GLPI : menus | 9 | bloquant (v1.9.0) |
+| Charte commune (licence, documentation, langues) | 1, 2, 10 | bloquant (v1.9.0) ; `charter-mode: warning` le temps d'une mise en conformité |
 
 Modifier la charte : PR sur ce dépôt (glpi-plugin-template), avec, si une règle devient
 vérifiable, son contrôle dans glpi-plugin-security (cas secbad/secgood) et une issue dans chaque
