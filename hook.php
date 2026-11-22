@@ -16,6 +16,7 @@
  */
 
 use GlpiPlugin\Monplugin\Config;
+use GlpiPlugin\Monplugin\PluginVersion;
 
 /**
  * Installation et désinstallation. Règles communes (vérifiées par le contrôle de sécurité) :
@@ -36,6 +37,7 @@ function plugin_monplugin_uninstall(): bool
 {
     ProfileRight::deleteProfileRights(['plugin_monplugin']);
     Config::uninstall();
+    PluginVersion::uninstall('monplugin');
 
     return true;
 }

@@ -89,6 +89,7 @@ L'adresse n'est ajoutée qu'une fois le projet réellement créé.
 setup.php  hook.php            déclaration et hooks ; installation, mises à jour, désinstallation
 src/                           classes PSR-4, espace de noms GlpiPlugin\<Clé>\ (dossier plat)
 src/Compat/                    différences GLPI 11 / 12 (Http.php...), un seul endroit
+src/PluginVersion.php          composant commun « Version du plugin » (section 9 bis)
 src/Install/                   installateur et migrations versionnées (si le plugin a des tables)
 front/  ajax/                  points d'entrée minces : droit, lecture de la requête, rendu Twig
 templates/                     Twig ; partiels préfixés « _ » (_page_help, _badge, _section_nav)
@@ -120,7 +121,8 @@ tools/HEADER                   en-tête de licence
   résultat.
 - **Entités respectées** : tout objet est créé dans l'entité de sa source ou celle choisie ;
   visibilité par `can()`.
-- **Aucun appel sortant sans réglage explicite** d'un administrateur.
+- **Aucun appel sortant sans réglage explicite** d'un administrateur. Seule exception : la lecture
+  de la dernière version publiée sur GitHub (section 9 bis), activée par défaut et désactivable.
 
 *Contrôle : revue (et principes rappelés dans la section « Principes » du README).*
 
@@ -207,6 +209,26 @@ jamais : un faux positif s'ignore ligne par ligne avec sa raison. *auto : CI du 
 
 *Contrôle : auto, contrôle « menus » des contrôles dans un vrai GLPI (bloquant au-delà d'une entrée) ;
 revue pour les réglages.*
+
+## 9 bis. Version du plugin (obligatoire)
+
+Chaque plugin affiche, en tête de l'onglet **Général** de sa page de configuration, l'encadré
+« Version du plugin » : version installée, dernière release publiée sur GitHub et un badge parmi
+trois, pour voir d'un coup d'œil si une mise à jour existe. Composant commun du modèle, repris tel
+quel (seuls la clé du plugin et le dépôt changent) :
+
+| Règle | Raison | Contrôle |
+|---|---|---|
+| Encadré `templates/_plugin_version.html.twig` en tête de l'onglet Général, alimenté par `(new PluginVersion('<clé>', 'parime/<dépôt>', PLUGIN_<CLÉ>_VERSION))->status($activée)` (`src/PluginVersion.php`). Jamais dans un menu d'exploitation ni sur une autre page. | Une information de réglage, au même endroit dans tous les plugins. | revue ; auto : contrôle de présence prévu dans glpi-plugin-security |
+| Trois badges : **« À jour »** (vert, `ti-circle-check`), **« Mise à jour disponible : vX.Y.Z »** (orange, `ti-alert-triangle`, liens vers les notes de version et l'archive), **« Dernière version inconnue »** (gris, `ti-circle-dashed`) **avec la raison** (vérification désactivée, pas d'accès à GitHub, limite atteinte, délai dépassé, aucune release, réponse illisible) et la date de la dernière vérification réussie. Une version installée plus récente que la release (version de développement) est « À jour ». | L'utilisateur sait toujours s'il est à jour, ou pourquoi on ne peut pas le lui dire. | auto : `tests/Unit/PluginVersionTest.php` |
+| Lecture **côté serveur** de `https://api.github.com/repos/parime/<dépôt>/releases/latest` (hors pre-release), par le client HTTP de GLPI (`src/Compat/Http.php`, proxy respecté), délai total de **3 s**, sans redirection. | Le navigateur de l'utilisateur ne contacte pas GitHub ; la page n'est jamais bloquée. | revue ; auto : PHPUnit (délai) |
+| **Cache de 12 h** dans `$GLPI_CACHE` (aucune écriture en base, donc aucune ligne d'historique de configuration), en-tête **`If-None-Match`** (ETag : une réponse 304 ne consomme pas la limite de 60 requêtes par heure de l'API sans authentification), nouvel essai **une heure** après un échec, **dernier résultat réussi réutilisé** pendant 7 jours en cas d'échec. | Ne pas épuiser la limite de GitHub, ne pas faire attendre chaque affichage. | auto : PHPUnit (cache, ETag, échecs) |
+| **Aucune donnée envoyée** hormis la requête elle-même : ni identifiant d'instance, ni jeton, ni version de GLPI. Liens affichés seulement s'ils pointent vers `https://github.com/`. | Vie privée de l'instance ; pas de lien piégé si la réponse est altérée. | auto : PHPUnit |
+| Réglage **« Vérifier les nouvelles versions sur GitHub »** (activé par défaut, `version_check`) dans l'onglet Général, pour les instances sans accès à Internet ; désactivé, aucun appel n'est fait. L'entrée de cache est retirée à la désinstallation (`PluginVersion::uninstall('<clé>')`). | Seule lecture sortante activée par défaut, explicitement désactivable (section 5). | auto : PHPUnit (aucun appel désactivé) ; revue |
+
+Un plugin qui a déjà son propre encadré (GRC, AssetSign, Configuration GLPI Auto) le remplace par
+ce composant ; un plugin dont la configuration n'est pas un `Config` du cœur passe simplement
+l'état de son réglage à `status()`.
 
 ## 10. Documentation
 
