@@ -7,6 +7,11 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), et ce p
 
 ## [Unreleased]
 
+### Corrigé
+
+- `src/Menu.php` ne redéclare plus `$rightname` : erreur fatale « Type of ...::$rightname must be string »
+  en GLPI 12 dès l'activation du plugin ; le droit est vérifié par `canView()` (#12).
+
 ### Changed
 
 - CI : contrôles de sécurité communs glpi-plugin-security v1.9.0 (charte commune et contrôle des menus bloquants par défaut).
