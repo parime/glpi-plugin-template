@@ -32,6 +32,9 @@ final class Config
     public const DEFAULTS = [
         'example_enabled' => '0',
         'example_label'   => '',
+        // Composant « Version du plugin » (charte section 9 bis) : désactivable pour une instance
+        // sans accès à Internet.
+        'version_check'   => '1',
     ];
 
     /**
@@ -50,6 +53,7 @@ final class Config
         \Config::setConfigurationValues(self::CONTEXT, [
             'example_enabled' => empty($input['example_enabled']) ? '0' : '1',
             'example_label'   => mb_substr(trim((string) ($input['example_label'] ?? '')), 0, 255),
+            'version_check'   => empty($input['version_check']) ? '0' : '1',
         ]);
     }
 
