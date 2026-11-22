@@ -14,6 +14,11 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), et ce p
 
 ### Ajouté
 
+- Feuille commune `public/css/monplugin.css`, chargée par `Hooks::ADD_CSS` : classes `bg-X-subtle`,
+  `text-X-emphasis` et `border-X-subtle` des douze couleurs nommées de Tabler (blue, azure, indigo,
+  purple, pink, red, orange, yellow, lime, green, teal, cyan), en thème clair et sombre, absentes de
+  GLPI et de Tabler (badges sans fond sinon). Reprise de GRC. Test `tests/Unit/SubtleColorClassesTest.php`
+  (job CI « PHPUnit ») et règle documentée dans la charte, section 8 (#10).
 - Charte commune des plugins (`CHARTE.md`), dont les traductions collaboratives (Hosted Weblate).
 - Modèle conforme à la charte : classes dans `src/` (`GlpiPlugin\Monplugin\`), une seule entrée de
   menu d'usage, page de configuration en onglets, encadré d'aide, badges, onglets de rubrique,

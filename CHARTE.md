@@ -92,6 +92,7 @@ src/Compat/                    différences GLPI 11 / 12 (Http.php...), un seul 
 src/Install/                   installateur et migrations versionnées (si le plugin a des tables)
 front/  ajax/                  points d'entrée minces : droit, lecture de la requête, rendu Twig
 templates/                     Twig ; partiels préfixés « _ » (_page_help, _badge, _section_nav)
+public/css/<clé>.css           classes bg-X-subtle / text-X-emphasis des couleurs nommées (section 8)
 locales/                       <clé>.pot et les 18 .po (+ .mo générés)
 tests/Unit  tests/Integration  tests/security
 tools/HEADER                   en-tête de licence
@@ -156,6 +157,21 @@ jamais : un faux positif s'ignore ligne par ligne avec sa raison. *auto : CI du 
   | en cours, information | `bg-blue-lt` | `ti-loader` |
   | neutre, retiré, sans objet | `bg-secondary-lt` | `ti-circle-dashed` |
 
+- **Classes `*-subtle` et `*-emphasis` des couleurs nommées** : GLPI et Tabler ne définissent
+  `bg-X-subtle`, `text-X-emphasis` et `border-X-subtle` que pour les couleurs de thème (`primary`,
+  `secondary`, `success`, `info`, `warning`, `danger`, `light`, `dark`). Pour les couleurs nommées
+  de Tabler (`blue`, `azure`, `indigo`, `purple`, `pink`, `red`, `orange`, `yellow`, `lime`,
+  `green`, `teal`, `cyan`), elles n'existent pas et le badge s'affiche **sans fond**. Chaque plugin
+  embarque donc la feuille commune `public/css/<clé>.css` (copie de celle du modèle, mêmes teintes
+  partout, variante sombre sous `[data-bs-theme="dark"]`, repli sur `--tblr-X-*` si Tabler les
+  fournit un jour), chargée sur toutes les pages par
+  `$PLUGIN_HOOKS[Hooks::ADD_CSS]['<clé>'] = ['css/<clé>.css'];` dans `setup.php`, et le test
+  `tests/Unit/SubtleColorClassesTest.php`. Ce test échoue si le code (Twig, PHP, JS) utilise une
+  classe de ce type que ni Tabler ni la feuille ne définissent, écrite en clair
+  (`bg-orange-subtle`) ou construite depuis un nom de couleur (`bg-{{ color }}-subtle` avec
+  `'color' => 'orange'` côté PHP). Le plugin qui n'utilise encore aucune couleur nommée garde le
+  test, qui protège l'avenir. Les classes `bg-X-lt` du tableau ci-dessus existent pour toutes les
+  couleurs et ne demandent rien. *auto : PHPUnit du plugin*
 - **Encadré d'aide** en tête de chaque page d'usage (partiel `_page_help.html.twig`) : « À quoi
   sert cette page ? », ce qui est attendu de l'utilisateur, référence éventuelle ; repliable,
   choix mémorisé.
