@@ -16,6 +16,7 @@ visuel, menus, documentation, publication) et avec les contrôles de sécurité 
 | Droits attribuables depuis les profils | `src/Profile.php`, `templates/profile_rights.html.twig` |
 | Installation, désinstallation sans reste | `hook.php` |
 | Visuel commun : encadré d'aide, badges, onglets de rubrique, configuration en onglets | `templates/_page_help.html.twig`, `_badge.html.twig`, `_section_nav.html.twig`, `menu.html.twig`, `config.html.twig` |
+| Encadré « Version du plugin » (onglet Général de la configuration) : version installée, dernière release GitHub, badge, cache 12 h, ETag, option pour désactiver | `src/PluginVersion.php`, `src/Compat/Http.php`, `templates/_plugin_version.html.twig`, `tests/Unit/PluginVersionTest.php` (charte section 9 bis) |
 | Classes `bg-X-subtle` / `text-X-emphasis` des couleurs nommées de Tabler (badges, clair et sombre) | `public/css/monplugin.css` (hook `ADD_CSS`), `tests/Unit/SubtleColorClassesTest.php` |
 | 18 langues, msgid en anglais, `.pot`, variantes régionales | `locales/`, `.github/scripts/sync-locale-variants.sh` |
 | Licence et attribution | `LICENSE`, `NOTICE`, `CITATION.cff`, `AGENTS.md`, `tools/HEADER` |
@@ -27,7 +28,8 @@ visuel, menus, documentation, publication) et avec les contrôles de sécurité 
 1. **Use this template** sur GitHub, puis cloner le nouveau dépôt.
 2. Remplacer `monplugin` / `Monplugin` / `MONPLUGIN` / « Mon plugin » / « My plugin » par la clé et
    le nom du plugin, dans les noms de fichiers comme dans le code, les Twig, les `.po` et
-   `.github/workflows/security.yml`. Adapter `NOTICE`, `CITATION.cff`, `tools/HEADER` (et l'en-tête
+   `.github/workflows/security.yml`, et le dépôt GitHub passé à `PluginVersion` dans
+   `front/config.php`. Adapter `NOTICE`, `CITATION.cff`, `tools/HEADER` (et l'en-tête
    des fichiers), `AGENTS.md` et les README.
 3. **Supprimer `CHARTE.md`** du nouveau dépôt : la seule référence est celle de ce modèle, vers
    laquelle pointent déjà `AGENTS.md` et les README.

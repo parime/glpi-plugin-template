@@ -7,6 +7,11 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), et ce p
 
 ## [Unreleased]
 
+### Corrigé
+
+- `src/Menu.php` ne redéclare plus `$rightname` : erreur fatale « Type of ...::$rightname must be string »
+  en GLPI 12 dès l'activation du plugin ; le droit est vérifié par `canView()` (#12).
+
 ### Changed
 
 - CI : contrôles de sécurité communs glpi-plugin-security v1.9.0 (charte commune et contrôle des menus bloquants par défaut).
@@ -14,6 +19,14 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), et ce p
 
 ### Ajouté
 
+- Composant commun « Version du plugin » (#12) : encadré en tête de l'onglet Général de la
+  configuration (`templates/_plugin_version.html.twig`, classe `src/PluginVersion.php`, clé du plugin
+  et dépôt en paramètres) avec la version installée, la dernière release GitHub et un badge « À jour »,
+  « Mise à jour disponible » (notes de version, archive) ou « Dernière version inconnue » avec la raison
+  et la date de la dernière vérification réussie. Lecture côté serveur par le client HTTP de GLPI
+  (`src/Compat/Http.php`, proxy respecté), délai de 3 s, cache de 12 h, ETag, dernier résultat
+  réutilisé en cas d'échec, option pour désactiver. Tests `tests/Unit/PluginVersionTest.php`,
+  22 chaînes traduites, section 9 bis de la charte.
 - Feuille commune `public/css/monplugin.css`, chargée par `Hooks::ADD_CSS` : classes `bg-X-subtle`,
   `text-X-emphasis` et `border-X-subtle` des douze couleurs nommées de Tabler (blue, azure, indigo,
   purple, pink, red, orange, yellow, lime, green, teal, cyan), en thème clair et sombre, absentes de

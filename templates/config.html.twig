@@ -43,9 +43,13 @@
          </div>
          <div class="card-body tab-content">
             <div class="tab-pane fade show active" id="monplugin-config-general" role="tabpanel">
+               {% include '@monplugin/_plugin_version.html.twig' with {plugin_version: plugin_version} %}
                {{ fields.sliderField('example_enabled', values.example_enabled, __('Enable the example', 'monplugin')) }}
                {{ fields.textField('example_label', values.example_label, __('Example label', 'monplugin'), {
                   'add_field_html': '<div class="form-hint">' ~ __('Shown on the overview page.', 'monplugin')|e ~ '</div>',
+               }) }}
+               {{ fields.sliderField('version_check', values.version_check, __('Check for new versions on GitHub', 'monplugin'), {
+                  'add_field_html': '<div class="form-hint">' ~ __('Reads the latest release published on GitHub at most every 12 hours, without sending any information about this GLPI. Turn it off on a server without Internet access.', 'monplugin')|e ~ '</div>',
                }) }}
             </div>
             <div class="tab-pane fade" id="monplugin-config-about" role="tabpanel">

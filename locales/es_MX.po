@@ -62,3 +62,75 @@ msgstr "Versión"
 
 msgid "License"
 msgstr "Licencia"
+
+msgid "Check for new versions on GitHub"
+msgstr "Buscar nuevas versiones en GitHub"
+
+msgid "Reads the latest release published on GitHub at most every 12 hours, without sending any information about this GLPI. Turn it off on a server without Internet access."
+msgstr "Lee la última versión publicada en GitHub como máximo cada 12 horas, sin enviar ninguna información sobre este GLPI. Desactívelo en un servidor sin acceso a Internet."
+
+msgid "the check is turned off in the settings below"
+msgstr "la verificación está desactivada en los ajustes de abajo"
+
+msgid "GitHub cannot be reached from the GLPI server (no Internet access, proxy or firewall)"
+msgstr "No se puede acceder a GitHub desde el servidor GLPI (sin acceso a Internet, proxy o cortafuegos)"
+
+msgid "the GitHub request limit is reached, a new attempt will be made within an hour"
+msgstr "se ha alcanzado el límite de solicitudes de GitHub, se hará un nuevo intento dentro de una hora"
+
+msgid "GitHub did not answer within 3 seconds"
+msgstr "GitHub no respondió en 3 segundos"
+
+msgid "no release is published on GitHub yet"
+msgstr "todavía no hay ninguna versión publicada en GitHub"
+
+msgid "the answer from GitHub could not be read"
+msgstr "no se pudo leer la respuesta de GitHub"
+
+msgid "Plugin version"
+msgstr "Versión del plugin"
+
+msgid "Installed version"
+msgstr "Versión instalada"
+
+msgid "Latest release on GitHub"
+msgstr "Última versión en GitHub"
+
+#, php-format
+msgid "Update available: %s"
+msgstr "Actualización disponible: %s"
+
+msgid "Latest version unknown"
+msgstr "Última versión desconocida"
+
+msgid "Release notes"
+msgstr "Notas de la versión"
+
+msgid "Download the archive"
+msgstr "Descargar el archivo"
+
+#, php-format
+msgid "Last check failed: %s."
+msgstr "La última verificación falló: %s."
+
+#, php-format
+msgid "Result of the last successful check (%s) shown."
+msgstr "Se muestra el resultado de la última verificación correcta (%s)."
+
+#, php-format
+msgid "Reason: %s."
+msgstr "Motivo: %s."
+
+#, php-format
+msgid "Last successful check: %s."
+msgstr "Última verificación correcta: %s."
+
+msgid "No successful check yet."
+msgstr "Todavía no hay ninguna verificación correcta."
+
+msgid "See the releases on GitHub"
+msgstr "Ver las versiones en GitHub"
+
+#, php-format
+msgid "Last checked: %s (checked again every 12 hours)."
+msgstr "Última verificación: %s (se verifica de nuevo cada 12 horas)."
