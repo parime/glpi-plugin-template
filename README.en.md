@@ -10,7 +10,8 @@ visual rules, menus, documentation, release) and with the common security checks
 1. **Use this template** on GitHub, then clone the new repository.
 2. Replace `monplugin` / `Monplugin` / `MONPLUGIN` / "Mon plugin" / "My plugin" with the plugin key
    and name everywhere (file names, code, Twig, `.po`, `.github/workflows/security.yml`), and adapt
-   `NOTICE`, `CITATION.cff`, `tools/HEADER`, `AGENTS.md` and both READMEs.
+   `NOTICE`, `CITATION.cff`, `tools/HEADER`, `AGENTS.md` and both READMEs. Set the GitHub
+   repository given to `PluginVersion` in `front/config.php` ("Plugin version" box, charter section 9 bis).
 3. Delete `CHARTE.md` from the new repository: the single reference is the template's one.
 4. Protect the main branch and require the "security" and "CI" jobs.
 
