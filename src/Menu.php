@@ -19,18 +19,16 @@ declare(strict_types=1);
 
 namespace GlpiPlugin\Monplugin;
 
-use CommonGLPI;
+use GlpiPlugin\Monplugin\Compat\Base\MenuBase;
 
 /**
  * Seule entrée de menu d'usage du plugin (Outils > Mon plugin, charte section 9). Les écrans du
  * plugin sont ses onglets ou sous-pages (templates/_section_nav.html.twig) ; elle n'apparaît
  * qu'avec le droit de lecture du plugin. Page : front/menu.php.
  */
-class Menu extends CommonGLPI
+class Menu extends MenuBase
 {
     public const RIGHTNAME = 'plugin_monplugin';
-
-    public static $rightname = self::RIGHTNAME;
 
     public static function getTypeName($nb = 0)
     {

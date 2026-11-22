@@ -7,6 +7,12 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), et ce p
 
 ## [Unreleased]
 
+### Fixed
+
+- GLPI 12 : erreur fatale au chargement du menu (`Menu::$rightname` sans type alors que GLPI 12 le
+  type `string`, #14). Couche de compatibilité `src/Compat/` (`GlpiVersion`, `Base/MenuBase`) :
+  la propriété est déclarée selon la version de GLPI.
+
 ### Changed
 
 - CI : contrôles de sécurité communs glpi-plugin-security v1.10.1 (secrets, dépendances, CodeQL, test de mise à jour depuis la version publiée, tests d'intégration en français, parcours de toutes les pages).
