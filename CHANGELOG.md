@@ -10,7 +10,8 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), et ce p
 ### Corrigé
 
 - Accessibilité de l'encadré « Version du plugin » (relevé par le parcours commun des pages, axe-core) :
-  badges de version en `bg-*-subtle text-*-emphasis` (contraste suffisant, charte section 8) et lien
+  badges de version, et badges « information » et « neutre » de `_badge.html.twig` (charte section 8),
+  en `bg-*-subtle text-*-emphasis` (contraste suffisant) et lien
   « Voir les versions sur GitHub » souligné, reconnaissable sans la couleur.
 - `src/Menu.php` ne redéclare plus `$rightname` : erreur fatale « Type of ...::$rightname must be string »
   en GLPI 12 dès l'activation du plugin ; le droit est vérifié par `canView()` (#12).
