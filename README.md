@@ -16,10 +16,11 @@ visuel, menus, documentation, publication) et avec les contrôles de sécurité 
 | Droits attribuables depuis les profils | `src/Profile.php`, `templates/profile_rights.html.twig` |
 | Installation, désinstallation sans reste | `hook.php` |
 | Visuel commun : encadré d'aide, badges, onglets de rubrique, configuration en onglets | `templates/_page_help.html.twig`, `_badge.html.twig`, `_section_nav.html.twig`, `menu.html.twig`, `config.html.twig` |
+| Classes `bg-X-subtle` / `text-X-emphasis` des couleurs nommées de Tabler (badges, clair et sombre) | `public/css/monplugin.css` (hook `ADD_CSS`), `tests/Unit/SubtleColorClassesTest.php` |
 | 18 langues, msgid en anglais, `.pot`, variantes régionales | `locales/`, `.github/scripts/sync-locale-variants.sh` |
 | Licence et attribution | `LICENSE`, `NOTICE`, `CITATION.cff`, `AGENTS.md`, `tools/HEADER` |
 | Documentation | `README.md`, `README.en.md`, `CHANGELOG.md`, `SECURITY.md` |
-| CI | `.github/workflows/ci.yml` (syntaxe PHP 8.2 à 8.5, traductions), `security.yml` (contrôles communs) |
+| CI | `.github/workflows/ci.yml` (syntaxe PHP 8.2 à 8.5, PHPUnit, traductions), `security.yml` (contrôles communs) |
 
 ## Démarrer un plugin
 

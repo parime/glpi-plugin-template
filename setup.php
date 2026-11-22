@@ -68,4 +68,9 @@ function plugin_init_monplugin(): void
     $PLUGIN_HOOKS[Hooks::CONFIG_PAGE]['monplugin'] = 'front/config.php';
     // ... et une seule entrée de menu d'usage, dans le secteur natif qui convient.
     $PLUGIN_HOOKS[Hooks::MENU_TOADD]['monplugin'] = ['tools' => Menu::class];
+
+    // Charte, section 8 : classes bg-X-subtle / text-X-emphasis / border-X-subtle des couleurs
+    // nommées de Tabler (orange, blue, green...), absentes de GLPI et de Tabler. Chargée sur toutes
+    // les pages, car les badges du plugin peuvent aussi apparaître dans les onglets des fiches du cœur.
+    $PLUGIN_HOOKS[Hooks::ADD_CSS]['monplugin'] = ['css/monplugin.css'];
 }

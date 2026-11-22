@@ -1,0 +1,258 @@
+/*
+ * -------------------------------------------------------------------------
+ * Mon plugin for GLPI
+ * Copyright (C) 2026 Vincent GUILLOTTE
+ * https://github.com/parime/glpi-plugin-template
+ * -------------------------------------------------------------------------
+ * LICENSE
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. See LICENSE for the full text.
+ * -------------------------------------------------------------------------
+ */
+
+/*
+ * Badges de couleur (charte section 8, parime/glpi-plugin-template#10) : GLPI et Tabler fournissent
+ * les classes bg-X-subtle, text-X-emphasis et border-X-subtle de Bootstrap 5.3 pour les couleurs de
+ * thème (primary, secondary, success, info, warning, danger, light, dark), mais pas pour les
+ * couleurs nommées de Tabler (blue, azure, indigo, purple, pink, red, orange, yellow, lime, green,
+ * teal, cyan). Sans cette feuille, les badges de ces couleurs s'affichent sans fond.
+ *
+ * Feuille commune à tous les plugins (reprise de GRC, glpi-iso27001-management#1029) : mêmes
+ * teintes partout. Après « Use this template », seul le préfixe des variables (--monplugin-) change.
+ *
+ * Teintes calculées depuis les couleurs de Tabler : fond à 70 % de blanc (70 % de noir en thème
+ * sombre), texte assombri (éclairci en sombre) jusqu'à un contraste d'au moins 7,5:1 en clair et
+ * 8:1 en sombre (WCAG 1.4.3 demande 4,5:1). L'orange reprend les valeurs de Docker Inventory.
+ *
+ * Variante sombre sous [data-bs-theme="dark"], le même sélecteur que Tabler pour bg-warning-subtle
+ * et ses voisines. Les palettes sombres de GLPI (darker, midnight...) posent data-glpi-theme-dark
+ * sans data-bs-theme : les badges de thème y gardent leur fond clair, et ceux-ci aussi, pour que les
+ * badges orange et rouges d'une même ligne restent assortis (texte foncé sur fond clair, lisible).
+ *
+ * Une valeur fournie un jour par Tabler (--tblr-X-bg-subtle...) l'emporte. Liste vérifiée par
+ * tests/Unit/SubtleColorClassesTest.php : toute nouvelle couleur utilisée doit être ajoutée ici.
+ */
+:root {
+    --monplugin-blue-bg-subtle: #b4d4f1;
+    --monplugin-blue-text-emphasis: #03305a;
+    --monplugin-blue-border-subtle: #82b7e8;
+    --monplugin-azure-bg-subtle: #c6e0f6;
+    --monplugin-azure-text-emphasis: #1c4261;
+    --monplugin-azure-border-subtle: #a0ccf0;
+    --monplugin-indigo-bg-subtle: #c6d0f9;
+    --monplugin-indigo-text-emphasis: #1c2b65;
+    --monplugin-indigo-border-subtle: #a0b1f5;
+    --monplugin-purple-bg-subtle: #e7c5ef;
+    --monplugin-purple-text-emphasis: #4b1b56;
+    --monplugin-purple-border-subtle: #d69ee4;
+    --monplugin-pink-bg-subtle: #f3c2d3;
+    --monplugin-pink-text-emphasis: #5c162e;
+    --monplugin-pink-border-subtle: #ea99b6;
+    --monplugin-red-bg-subtle: #f3c4c4;
+    --monplugin-red-text-emphasis: #5c1919;
+    --monplugin-red-border-subtle: #ea9c9c;
+    --monplugin-orange-bg-subtle: #fdd3b5;
+    --monplugin-orange-text-emphasis: #6b2c02;
+    --monplugin-orange-border-subtle: #fbb383;
+    --monplugin-yellow-bg-subtle: #fce2b2;
+    --monplugin-yellow-text-emphasis: #603e00;
+    --monplugin-yellow-border-subtle: #facf80;
+    --monplugin-lime-bg-subtle: #d5eab9;
+    --monplugin-lime-text-emphasis: #304b09;
+    --monplugin-lime-border-subtle: #badc8a;
+    --monplugin-green-bg-subtle: #c1e8c7;
+    --monplugin-green-text-emphasis: #144b1d;
+    --monplugin-green-border-subtle: #97d9a2;
+    --monplugin-teal-bg-subtle: #b6e4d6;
+    --monplugin-teal-text-emphasis: #054734;
+    --monplugin-teal-border-subtle: #86d2bc;
+    --monplugin-cyan-bg-subtle: #b9e3ea;
+    --monplugin-cyan-text-emphasis: #0a464f;
+    --monplugin-cyan-border-subtle: #8bd0dc;
+}
+
+[data-bs-theme="dark"] {
+    --monplugin-blue-bg-subtle: #02213f;
+    --monplugin-blue-text-emphasis: #8fbeea;
+    --monplugin-blue-border-subtle: #033868;
+    --monplugin-azure-bg-subtle: #142e44;
+    --monplugin-azure-text-emphasis: #aad1f2;
+    --monplugin-azure-border-subtle: #214c70;
+    --monplugin-indigo-bg-subtle: #141e47;
+    --monplugin-indigo-text-emphasis: #aab9f6;
+    --monplugin-indigo-border-subtle: #213276;
+    --monplugin-purple-bg-subtle: #34133c;
+    --monplugin-purple-text-emphasis: #dba8e7;
+    --monplugin-purple-border-subtle: #571f64;
+    --monplugin-pink-bg-subtle: #400f20;
+    --monplugin-pink-text-emphasis: #eda3bd;
+    --monplugin-pink-border-subtle: #6b1a36;
+    --monplugin-red-bg-subtle: #401111;
+    --monplugin-red-text-emphasis: #eda6a6;
+    --monplugin-red-border-subtle: #6b1c1c;
+    --monplugin-orange-bg-subtle: #4a1f02;
+    --monplugin-orange-text-emphasis: #fdba8c;
+    --monplugin-orange-border-subtle: #7c3404;
+    --monplugin-yellow-bg-subtle: #4a3000;
+    --monplugin-yellow-text-emphasis: #fad48c;
+    --monplugin-yellow-border-subtle: #7a5000;
+    --monplugin-lime-bg-subtle: #233707;
+    --monplugin-lime-text-emphasis: #c0df96;
+    --monplugin-lime-border-subtle: #3a5c0b;
+    --monplugin-green-bg-subtle: #0e3614;
+    --monplugin-green-text-emphasis: #a1ddab;
+    --monplugin-green-border-subtle: #185a22;
+    --monplugin-teal-bg-subtle: #043224;
+    --monplugin-teal-text-emphasis: #92d7c2;
+    --monplugin-teal-border-subtle: #06533c;
+    --monplugin-cyan-bg-subtle: #073137;
+    --monplugin-cyan-text-emphasis: #97d5df;
+    --monplugin-cyan-border-subtle: #0c515c;
+}
+
+.bg-blue-subtle {
+    background-color: var(--tblr-blue-bg-subtle, var(--monplugin-blue-bg-subtle)) !important;
+}
+
+.text-blue-emphasis {
+    color: var(--tblr-blue-text-emphasis, var(--monplugin-blue-text-emphasis)) !important;
+}
+
+.border-blue-subtle {
+    border-color: var(--tblr-blue-border-subtle, var(--monplugin-blue-border-subtle)) !important;
+}
+
+.bg-azure-subtle {
+    background-color: var(--tblr-azure-bg-subtle, var(--monplugin-azure-bg-subtle)) !important;
+}
+
+.text-azure-emphasis {
+    color: var(--tblr-azure-text-emphasis, var(--monplugin-azure-text-emphasis)) !important;
+}
+
+.border-azure-subtle {
+    border-color: var(--tblr-azure-border-subtle, var(--monplugin-azure-border-subtle)) !important;
+}
+
+.bg-indigo-subtle {
+    background-color: var(--tblr-indigo-bg-subtle, var(--monplugin-indigo-bg-subtle)) !important;
+}
+
+.text-indigo-emphasis {
+    color: var(--tblr-indigo-text-emphasis, var(--monplugin-indigo-text-emphasis)) !important;
+}
+
+.border-indigo-subtle {
+    border-color: var(--tblr-indigo-border-subtle, var(--monplugin-indigo-border-subtle)) !important;
+}
+
+.bg-purple-subtle {
+    background-color: var(--tblr-purple-bg-subtle, var(--monplugin-purple-bg-subtle)) !important;
+}
+
+.text-purple-emphasis {
+    color: var(--tblr-purple-text-emphasis, var(--monplugin-purple-text-emphasis)) !important;
+}
+
+.border-purple-subtle {
+    border-color: var(--tblr-purple-border-subtle, var(--monplugin-purple-border-subtle)) !important;
+}
+
+.bg-pink-subtle {
+    background-color: var(--tblr-pink-bg-subtle, var(--monplugin-pink-bg-subtle)) !important;
+}
+
+.text-pink-emphasis {
+    color: var(--tblr-pink-text-emphasis, var(--monplugin-pink-text-emphasis)) !important;
+}
+
+.border-pink-subtle {
+    border-color: var(--tblr-pink-border-subtle, var(--monplugin-pink-border-subtle)) !important;
+}
+
+.bg-red-subtle {
+    background-color: var(--tblr-red-bg-subtle, var(--monplugin-red-bg-subtle)) !important;
+}
+
+.text-red-emphasis {
+    color: var(--tblr-red-text-emphasis, var(--monplugin-red-text-emphasis)) !important;
+}
+
+.border-red-subtle {
+    border-color: var(--tblr-red-border-subtle, var(--monplugin-red-border-subtle)) !important;
+}
+
+.bg-orange-subtle {
+    background-color: var(--tblr-orange-bg-subtle, var(--monplugin-orange-bg-subtle)) !important;
+}
+
+.text-orange-emphasis {
+    color: var(--tblr-orange-text-emphasis, var(--monplugin-orange-text-emphasis)) !important;
+}
+
+.border-orange-subtle {
+    border-color: var(--tblr-orange-border-subtle, var(--monplugin-orange-border-subtle)) !important;
+}
+
+.bg-yellow-subtle {
+    background-color: var(--tblr-yellow-bg-subtle, var(--monplugin-yellow-bg-subtle)) !important;
+}
+
+.text-yellow-emphasis {
+    color: var(--tblr-yellow-text-emphasis, var(--monplugin-yellow-text-emphasis)) !important;
+}
+
+.border-yellow-subtle {
+    border-color: var(--tblr-yellow-border-subtle, var(--monplugin-yellow-border-subtle)) !important;
+}
+
+.bg-lime-subtle {
+    background-color: var(--tblr-lime-bg-subtle, var(--monplugin-lime-bg-subtle)) !important;
+}
+
+.text-lime-emphasis {
+    color: var(--tblr-lime-text-emphasis, var(--monplugin-lime-text-emphasis)) !important;
+}
+
+.border-lime-subtle {
+    border-color: var(--tblr-lime-border-subtle, var(--monplugin-lime-border-subtle)) !important;
+}
+
+.bg-green-subtle {
+    background-color: var(--tblr-green-bg-subtle, var(--monplugin-green-bg-subtle)) !important;
+}
+
+.text-green-emphasis {
+    color: var(--tblr-green-text-emphasis, var(--monplugin-green-text-emphasis)) !important;
+}
+
+.border-green-subtle {
+    border-color: var(--tblr-green-border-subtle, var(--monplugin-green-border-subtle)) !important;
+}
+
+.bg-teal-subtle {
+    background-color: var(--tblr-teal-bg-subtle, var(--monplugin-teal-bg-subtle)) !important;
+}
+
+.text-teal-emphasis {
+    color: var(--tblr-teal-text-emphasis, var(--monplugin-teal-text-emphasis)) !important;
+}
+
+.border-teal-subtle {
+    border-color: var(--tblr-teal-border-subtle, var(--monplugin-teal-border-subtle)) !important;
+}
+
+.bg-cyan-subtle {
+    background-color: var(--tblr-cyan-bg-subtle, var(--monplugin-cyan-bg-subtle)) !important;
+}
+
+.text-cyan-emphasis {
+    color: var(--tblr-cyan-text-emphasis, var(--monplugin-cyan-text-emphasis)) !important;
+}
+
+.border-cyan-subtle {
+    border-color: var(--tblr-cyan-border-subtle, var(--monplugin-cyan-border-subtle)) !important;
+}

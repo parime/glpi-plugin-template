@@ -25,6 +25,19 @@ jobs:
           coverage: none
       - run: find . -path ./vendor -prune -o -name "*.php" -print0 | xargs -0 -n1 php -l
 
+  phpunit:
+    name: "PHPUnit (unitaires)"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7 (SHA pinned)
+      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2 (SHA pinned)
+        with:
+          php-version: "8.2"
+          coverage: none
+          tools: phpunit:11
+      # Tests sans GLPI ni base (tests/Unit), dont SubtleColorClassesTest (charte section 8).
+      - run: phpunit
+
   locales:
     name: "Traductions complètes"
     runs-on: ubuntu-latest
