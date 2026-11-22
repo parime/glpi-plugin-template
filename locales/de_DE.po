@@ -62,3 +62,75 @@ msgstr "Version"
 
 msgid "License"
 msgstr "Lizenz"
+
+msgid "Check for new versions on GitHub"
+msgstr "Auf GitHub nach neuen Versionen suchen"
+
+msgid "Reads the latest release published on GitHub at most every 12 hours, without sending any information about this GLPI. Turn it off on a server without Internet access."
+msgstr "Liest höchstens alle 12 Stunden die neueste auf GitHub veröffentlichte Version, ohne Informationen über dieses GLPI zu senden. Auf einem Server ohne Internetzugang deaktivieren."
+
+msgid "the check is turned off in the settings below"
+msgstr "die Prüfung ist in den Einstellungen unten deaktiviert"
+
+msgid "GitHub cannot be reached from the GLPI server (no Internet access, proxy or firewall)"
+msgstr "GitHub ist vom GLPI-Server aus nicht erreichbar (kein Internetzugang, Proxy oder Firewall)"
+
+msgid "the GitHub request limit is reached, a new attempt will be made within an hour"
+msgstr "das Anfragelimit von GitHub ist erreicht, ein neuer Versuch erfolgt innerhalb einer Stunde"
+
+msgid "GitHub did not answer within 3 seconds"
+msgstr "GitHub hat nicht innerhalb von 3 Sekunden geantwortet"
+
+msgid "no release is published on GitHub yet"
+msgstr "auf GitHub ist noch keine Version veröffentlicht"
+
+msgid "the answer from GitHub could not be read"
+msgstr "die Antwort von GitHub konnte nicht gelesen werden"
+
+msgid "Plugin version"
+msgstr "Plugin-Version"
+
+msgid "Installed version"
+msgstr "Installierte Version"
+
+msgid "Latest release on GitHub"
+msgstr "Neueste Version auf GitHub"
+
+#, php-format
+msgid "Update available: %s"
+msgstr "Aktualisierung verfügbar: %s"
+
+msgid "Latest version unknown"
+msgstr "Neueste Version unbekannt"
+
+msgid "Release notes"
+msgstr "Versionshinweise"
+
+msgid "Download the archive"
+msgstr "Archiv herunterladen"
+
+#, php-format
+msgid "Last check failed: %s."
+msgstr "Die letzte Prüfung ist fehlgeschlagen: %s."
+
+#, php-format
+msgid "Result of the last successful check (%s) shown."
+msgstr "Ergebnis der letzten erfolgreichen Prüfung (%s) angezeigt."
+
+#, php-format
+msgid "Reason: %s."
+msgstr "Grund: %s."
+
+#, php-format
+msgid "Last successful check: %s."
+msgstr "Letzte erfolgreiche Prüfung: %s."
+
+msgid "No successful check yet."
+msgstr "Noch keine erfolgreiche Prüfung."
+
+msgid "See the releases on GitHub"
+msgstr "Versionen auf GitHub ansehen"
+
+#, php-format
+msgid "Last checked: %s (checked again every 12 hours)."
+msgstr "Zuletzt geprüft: %s (erneute Prüfung alle 12 Stunden)."
