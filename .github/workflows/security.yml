@@ -14,8 +14,17 @@ permissions:
 
 jobs:
   security:
-    uses: parime/glpi-plugin-security/.github/workflows/plugin-security.yml@v1.9.0
+    uses: parime/glpi-plugin-security/.github/workflows/plugin-security.yml@v1.10.2
     with:
       plugin-key: monplugin
+      # Pas de passe des tests d'intégration en français : la suite du modèle n'a que des tests
+      # unitaires, sans GLPI ni base (phpunit.xml.dist), lancés par ci.yml avec un PHPUnit global ;
+      # un plugin créé depuis le modèle retire cette ligne dès qu'il a une suite d'intégration.
+      integration-languages: '[]'
       # Jeu de données créé avant la désinstallation (facultatif, conseillé dès qu'il existe) :
       # seed-command: php plugins/monplugin/tests/security/setup.php
+      # Test de mise à jour depuis la dernière release (GLPI 11 et 12), actif par défaut :
+      # upgrade-test: false pour le désactiver, upgrade-seed-command pour un autre jeu de données.
+      # Parcours de toutes les pages (GLPI 11 et 12), actif par défaut : pages-test: false pour le
+      # désactiver, pages-mode: warning le temps d'une issue de correction, pages-accounts pour
+      # d'autres comptes que glpi et tech.

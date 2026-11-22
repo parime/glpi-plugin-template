@@ -156,8 +156,11 @@ jamais : un faux positif s'ignore ligne par ligne avec sa raison. *auto : CI du 
   | conforme, terminé, à jour | `bg-green-lt` | `ti-circle-check` |
   | à surveiller, bientôt échu | `bg-orange-lt` | `ti-alert-triangle` |
   | en retard, critique, refusé | `bg-red-lt` | `ti-alert-octagon` |
-  | en cours, information | `bg-blue-lt` | `ti-loader` |
-  | neutre, retiré, sans objet | `bg-secondary-lt` | `ti-circle-dashed` |
+  | en cours, information | `bg-info-subtle text-info-emphasis` | `ti-loader` |
+  | neutre, retiré, sans objet | `bg-secondary-subtle text-secondary-emphasis` | `ti-circle-dashed` |
+
+  `bg-blue-lt` et `bg-secondary-lt` n'atteignent pas le contraste WCAG AA (axe-core, parcours
+  commun des pages) : bleu et gris passent par les classes de thème `-subtle`/`-emphasis`.
 
 - **Classes `*-subtle` et `*-emphasis` des couleurs nommées** : GLPI et Tabler ne définissent
   `bg-X-subtle`, `text-X-emphasis` et `border-X-subtle` que pour les couleurs de thème (`primary`,

@@ -9,11 +9,16 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), et ce p
 
 ### Corrigé
 
+- Accessibilité de l'encadré « Version du plugin » (relevé par le parcours commun des pages, axe-core) :
+  badges de version, et badges « information » et « neutre » de `_badge.html.twig` (charte section 8),
+  en `bg-*-subtle text-*-emphasis` (contraste suffisant) et lien
+  « Voir les versions sur GitHub » souligné, reconnaissable sans la couleur.
 - `src/Menu.php` ne redéclare plus `$rightname` : erreur fatale « Type of ...::$rightname must be string »
   en GLPI 12 dès l'activation du plugin ; le droit est vérifié par `canView()` (#12).
 
 ### Changed
 
+- CI : contrôles de sécurité communs glpi-plugin-security v1.10.1 (secrets, dépendances, CodeQL, test de mise à jour depuis la version publiée, tests d'intégration en français, parcours de toutes les pages).
 - CI : contrôles de sécurité communs glpi-plugin-security v1.9.0 (charte commune et contrôle des menus bloquants par défaut).
 - CI : le contrôle « Sécurité commune » ne tourne plus sur chaque push de branche de travail, seulement sur les PR et les branches principales (moins d'exécutions en double et de notifications d'échec).
 
