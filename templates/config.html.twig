@@ -43,6 +43,8 @@
          </div>
          <div class="card-body tab-content">
             <div class="tab-pane fade show active" id="monplugin-config-general" role="tabpanel">
+               {# Premier bloc de la page, en tête du premier onglet (charte, section 9 bis) : rien avant lui
+                  hormis l'aide de page et la barre d'onglets. #}
                {% include '@monplugin/_plugin_version.html.twig' with {plugin_version: plugin_version} %}
                {{ fields.sliderField('example_enabled', values.example_enabled, __('Enable the example', 'monplugin')) }}
                {{ fields.textField('example_label', values.example_label, __('Example label', 'monplugin'), {

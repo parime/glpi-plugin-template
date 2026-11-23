@@ -7,6 +7,14 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), et ce p
 
 ## [Unreleased]
 
+### Modifié
+
+- Charte, sections 9 et 9 bis : l'encadré « Version du plugin » est le premier bloc affiché de la
+  page de configuration, tout en haut de son premier onglet (seuls l'aide de page et la barre
+  d'onglets le précèdent), vérifié par l'écart `config-version-premier` des contrôles communs
+  v1.11.3 ; chaque étape d'une liste de démarrage a un bouton direct vers son écran et le chemin
+  complet du menu (#18). Commentaire dans `templates/config.html.twig`.
+
 ### Corrigé
 
 - Accessibilité de l'encadré « Version du plugin » (relevé par le parcours commun des pages, axe-core) :
