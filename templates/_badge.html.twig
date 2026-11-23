@@ -14,12 +14,13 @@
  #}
 
 {# Badge de statut, couleurs et icônes communes à tous les plugins (charte section 8) :
-   ok (vert), warning (orange), danger (rouge), info (bleu), neutral (gris).
+   ok (vert), warning (orange), danger (rouge), info (bleu), neutral (gris), en classes de thème
+   -subtle/-emphasis : les bg-X-lt n'atteignent pas le contraste WCAG AA (axe-core).
    Usage : {% include '@monplugin/_badge.html.twig' with {kind: 'ok', label: __('Up to date', 'monplugin')} %} #}
 {% set styles = {
-   'ok':      ['bg-green-lt', 'ti-circle-check'],
-   'warning': ['bg-orange-lt', 'ti-alert-triangle'],
-   'danger':  ['bg-red-lt', 'ti-alert-octagon'],
+   'ok':      ['bg-success-subtle text-success-emphasis', 'ti-circle-check'],
+   'warning': ['bg-warning-subtle text-warning-emphasis', 'ti-alert-triangle'],
+   'danger':  ['bg-danger-subtle text-danger-emphasis', 'ti-alert-octagon'],
    'info':    ['bg-info-subtle text-info-emphasis', 'ti-loader'],
    'neutral': ['bg-secondary-subtle text-secondary-emphasis', 'ti-circle-dashed'],
 } %}

@@ -13,6 +13,11 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), et ce p
   badges de version, et badges « information » et « neutre » de `_badge.html.twig` (charte section 8),
   en `bg-*-subtle text-*-emphasis` (contraste suffisant) et lien
   « Voir les versions sur GitHub » souligné, reconnaissable sans la couleur.
+- Badges « ok », « warning » et « danger » de `_badge.html.twig` en `bg-*-subtle text-*-emphasis` :
+  les `bg-*-lt` n'atteignent pas le contraste WCAG AA (#16). Barre d'onglets `_section_nav.html.twig`
+  en `role=tablist`/`role=tab` avec `aria-selected`, onglets en `text-body` (l'onglet focalisé au
+  clavier prenait la couleur de focus de GLPI, contraste 3,26), comme l'exige le parcours des pages
+  des contrôles communs depuis la v1.10.3.
 - `src/Menu.php` ne redéclare plus `$rightname` : erreur fatale « Type of ...::$rightname must be string »
   en GLPI 12 dès l'activation du plugin ; le droit est vérifié par `canView()` (#12).
 
