@@ -194,6 +194,13 @@ jamais : un faux positif s'ignore ligne par ligne avec sa raison. *auto : CI du 
 - **Tous les réglages dans la page de configuration du plugin** (`Hooks::CONFIG_PAGE`, ouverte
   depuis Configuration > Plugins), organisée en **onglets**. Pas de réglage ailleurs. Accès :
   droit `config` de GLPI (ou droit de configuration propre au plugin).
+- **L'encadré « Version du plugin » est le premier bloc affiché** de la page de configuration, tout
+  en haut de son premier onglet : seuls l'encadré « À quoi sert cette page ? » et la barre
+  d'onglets le précèdent (détail en section 9 bis).
+- **Liste de démarrage** : chaque étape d'une liste de démarrage (ou de mise en service) a un
+  **bouton direct vers son écran** et indique le **chemin complet du menu** pour y revenir
+  (par exemple « Configuration > Plugins > Mon plugin > Connexions »), jamais seulement « dans le
+  menu du plugin ».
 - **Une seule entrée de menu d'usage au plus** (`Hooks::MENU_TOADD`), dans le secteur natif qui
   convient (Parc, Assistance, Outils...), avec onglets ou sous-pages pour ses écrans. Pas d'entrée
   dans Configuration ou Administration pour des réglages, ni de secteur de menu propre. Exception :
@@ -215,14 +222,15 @@ revue pour les réglages.*
 
 ## 9 bis. Version du plugin (obligatoire)
 
-Chaque plugin affiche, en tête de l'onglet **Général** de sa page de configuration, l'encadré
+Chaque plugin affiche, comme **premier bloc** de sa page de configuration, tout en haut de son
+premier onglet (en général **Général**), l'encadré
 « Version du plugin » : version installée, dernière release publiée sur GitHub et un badge parmi
 trois, pour voir d'un coup d'œil si une mise à jour existe. Composant commun du modèle, repris tel
 quel (seuls la clé du plugin et le dépôt changent) :
 
 | Règle | Raison | Contrôle |
 |---|---|---|
-| Encadré `templates/_plugin_version.html.twig` en tête de l'onglet Général, alimenté par `(new PluginVersion('<clé>', 'parime/<dépôt>', PLUGIN_<CLÉ>_VERSION))->status($activée)` (`src/PluginVersion.php`). Jamais dans un menu d'exploitation ni sur une autre page. | Une information de réglage, au même endroit dans tous les plugins. | revue ; auto : contrôle de présence prévu dans glpi-plugin-security |
+| Encadré `templates/_plugin_version.html.twig`, **premier bloc** du premier onglet de la page de configuration (seuls l'aide de page et la barre d'onglets le précèdent ; ni titre, ni champ, ni alerte, ni liste de démarrage avant lui), alimenté par `(new PluginVersion('<clé>', 'parime/<dépôt>', PLUGIN_<CLÉ>_VERSION))->status($activée)` (`src/PluginVersion.php`). Jamais dans un menu d'exploitation ni sur une autre page. | Une information de réglage, vue en premier et au même endroit dans tous les plugins. | auto : écarts `config-version` (présence) et `config-version-premier` (position) du contrôle d'ergonomie de glpi-plugin-security (v1.11.3) |
 | Trois badges : **« À jour »** (vert, `ti-circle-check`), **« Mise à jour disponible : vX.Y.Z »** (orange, `ti-alert-triangle`, liens vers les notes de version et l'archive), **« Dernière version inconnue »** (gris, `ti-circle-dashed`) **avec la raison** (vérification désactivée, pas d'accès à GitHub, limite atteinte, délai dépassé, aucune release, réponse illisible) et la date de la dernière vérification réussie. Une version installée plus récente que la release (version de développement) est « À jour ». | L'utilisateur sait toujours s'il est à jour, ou pourquoi on ne peut pas le lui dire. | auto : `tests/Unit/PluginVersionTest.php` |
 | Lecture **côté serveur** de `https://api.github.com/repos/parime/<dépôt>/releases/latest` (hors pre-release), par le client HTTP de GLPI (`src/Compat/Http.php`, proxy respecté), délai total de **3 s**, sans redirection. | Le navigateur de l'utilisateur ne contacte pas GitHub ; la page n'est jamais bloquée. | revue ; auto : PHPUnit (délai) |
 | **Cache de 12 h** dans `$GLPI_CACHE` (aucune écriture en base, donc aucune ligne d'historique de configuration), en-tête **`If-None-Match`** (ETag : une réponse 304 ne consomme pas la limite de 60 requêtes par heure de l'API sans authentification), nouvel essai **une heure** après un échec, **dernier résultat réussi réutilisé** pendant 7 jours en cas d'échec. | Ne pas épuiser la limite de GitHub, ne pas faire attendre chaque affichage. | auto : PHPUnit (cache, ETag, échecs) |
