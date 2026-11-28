@@ -33,8 +33,13 @@ visuel, menus, documentation, publication) et avec les contrôles de sécurité 
    des fichiers), `AGENTS.md` et les README.
 3. **Supprimer `CHARTE.md`** du nouveau dépôt : la seule référence est celle de ce modèle, vers
    laquelle pointent déjà `AGENTS.md` et les README.
-4. Dans **Settings > Branches**, protéger la branche principale et rendre obligatoires les jobs
-   « security / ... » et « CI ».
+4. Protéger `main` (et `dev` si le plugin en a une) contre la suppression et le force push :
+   `scripts/protect-branches.sh parime/<dépôt>` du dépôt
+   [glpi-plugin-security](https://github.com/parime/glpi-plugin-security) (droits d'administration
+   du dépôt). Puis, dans **Settings > Branches**, rendre obligatoires les jobs « security / ... » et
+   « CI ». Sans protection, la fusion d'une PR `main` vers `dev` supprime `main` (suppression
+   automatique des branches fusionnées) et bloque toute publication ; l'audit hebdomadaire de
+   glpi-plugin-security le signale.
 5. Ajouter les workflows de publication (`auto-tag.yml`, `release.yml`) et le catalogue `<clé>.xml`
    en les copiant depuis le plugin le plus récent (charte section 11), ainsi que les jobs de CI
    complets (charte section 7).
