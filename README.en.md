@@ -13,7 +13,12 @@ visual rules, menus, documentation, release) and with the common security checks
    `NOTICE`, `CITATION.cff`, `tools/HEADER`, `AGENTS.md` and both READMEs. Set the GitHub
    repository given to `PluginVersion` in `front/config.php` ("Plugin version" box, charter section 9 bis).
 3. Delete `CHARTE.md` from the new repository: the single reference is the template's one.
-4. Protect the main branch and require the "security" and "CI" jobs.
+4. Protect `main` (and `dev` if the plugin has one) against deletion and force push with
+   `scripts/protect-branches.sh parime/<repository>` from
+   [glpi-plugin-security](https://github.com/parime/glpi-plugin-security) (repository admin rights),
+   then require the "security" and "CI" jobs. Without protection, merging a `main` to `dev` PR
+   deletes `main` (merged branches are deleted automatically) and blocks every release; the weekly
+   audit of glpi-plugin-security reports it.
 
 ## Reuse and citation
 

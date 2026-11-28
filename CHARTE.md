@@ -259,6 +259,10 @@ l'état de son réglage à `status()`.
   marketplace avec sa ligne de CHANGELOG. Copier ces workflows depuis le plugin le plus récent.
 - Chaque lot fini et testé part en version, sans attendre (GRC : `dev` puis `main`, puis `main`
   ramené dans `dev` par un merge commit).
+- `main` et `dev` (quand elle existe) sont protégées contre la suppression et le force push
+  (`scripts/protect-branches.sh` de glpi-plugin-security) : sans cela, la fusion d'une PR `main`
+  vers `dev` supprime `main` et plus rien ne peut être publié (cas réel : glpi-finops). Contrôle :
+  audit hebdomadaire de glpi-plugin-security.
 
 ## 12. Commits, PR et issues
 
